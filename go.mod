@@ -1,3 +1,3 @@
-module github.com/czimm203/qtree
+module qtree
 
 go 1.18
