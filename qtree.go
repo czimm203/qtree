@@ -43,7 +43,6 @@ type QTree struct {
 }
 
 func (qt *QTree) Find(p Point) []Node {
-    // Walk tree to leaf and return it's contents
     pts := make([]Node,0)
     if !qt.SurroundsPoint(p) {
         log.Println("Point not contained")
@@ -73,15 +72,11 @@ func (qt *QTree) FindInBoundingBox(ul Point, lr Point) []Node {
     pts := make([]Node, 0)
 
     if !qt.BoundedBy(ul, lr) {
-        log.Println("Point not contained")
         return pts
     } else if qt.isLeaf {
         for i := range qt.node {
             if SurroundsPoint(qt.node[i].Loc, ul, lr) {
                 pts = append(pts, qt.node[i])
-                if(len(pts)) > MAX_NODES {
-                    log.Panic("too many nodes")
-                }
             }
         }
     } else {
@@ -134,7 +129,7 @@ func (qt *QTree) Insert(n Node) {
         }
     }
     if len(qt.node) > MAX_NODES {
-        log.Fatalf("sad\n")
+        log.Fatalf("Too many nodes in quad\n")
     }   
 }
 
